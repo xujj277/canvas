@@ -5,6 +5,5 @@
 
 #canvas {
   background: lightpink;
-  height: 100vh;
-  position: relative;
+  display: block;
 }
