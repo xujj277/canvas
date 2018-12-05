@@ -7,3 +7,17 @@
   background: lightpink;
   display: block;
 }
+.actions {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.actions > #brush {
+  display: none;
+}
+.actions.showBrushButton > #brush {
+  display: inline-block;
+}
+.actions.showBrushButton > #eraser {
+  display: none;
+}

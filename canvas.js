@@ -1,14 +1,20 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext('2d')
-var painting = false
+var using = false
 var lastPoint = {x: undefined, y: undefined}
 
-
-function drawCircle (x, y, radius) {
-  context.beginPath()
-  context.arc(x, y, radius, 0, 360)
-  context.fill()
+var eraserEnabled = false
+eraser.onclick = function () {
+  eraserEnabled = true
+  actions.className = 'actions showBrushButton'
 }
+brush.onclick = function () {
+  eraserEnabled = false
+  actions.className = 'actions'
+}
+
+autoSetCanvasSize(canvas)
+listenToMouse(canvas)
 
 function drawLine (x1, y1, x2, y2) {
   context.beginPath()
@@ -19,23 +25,43 @@ function drawLine (x1, y1, x2, y2) {
   context.closePath()
 }
 
-canvas.onmousedown = function (val) {
-  painting = true
-  var x = val.clientX
-  var y = val.clientY
-  lastPoint = {x: x, y: y}
-  drawCircle(x, y, 1)
+function autoSetCanvasSize (canvas) {
+  setCanvasSize()
+  window.onresize = function () {
+    setCanvasSize()
+  }
+  function setCanvasSize () {
+    var pageWidth = document.documentElement.clientWidth
+    var pageHeight = document.documentElement.clientHeight
+    canvas.width = pageWidth
+    canvas.height = pageHeight
+  }
 }
-canvas.onmousemove = function (val) {
-  if (painting) {
+
+function listenToMouse (canvas) {
+  canvas.onmousedown = function (val) { 
     var x = val.clientX
     var y = val.clientY
-    var newPoint = {x: x, y: y}
-    drawCircle(x, y, 1)
-    drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-    lastPoint = newPoint
+    using = true
+    if (eraserEnabled) {
+      context.clearRect(x-5, y-5, 10, 10)
+    } else {
+      lastPoint = {x: x, y: y}
+    }
   }
-} 
-canvas.onmouseup = function (val) {
-  painting = false
+  canvas.onmousemove = function (val) {
+    var x = val.clientX
+    var y = val.clientY
+    if (!using) return
+    if (eraserEnabled) {
+      context.clearRect(x-5, y-5, 10, 10)
+    } else {
+      var newPoint = {x: x, y: y}
+      drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+      lastPoint = newPoint
+    }
+  } 
+  canvas.onmouseup = function (val) {
+    using = false
+  }
 }
