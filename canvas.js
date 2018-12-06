@@ -31,32 +31,62 @@ function setCanvasSize () {
   canvas.height = pageHeight
 }
 function listenToUser (canvas) {
-  canvas.onmousedown = function (val) {
-    using = true
-    var x = val.clientX
-    var y = val.clientY
-    if (eraserEnabled) {
-      context.clearRect(x-5, y-5, 10, 10)
-    } else {
-      lastPoint = {x: x, y: y}
+  if (document.body.ontouchstart !== undefined) {
+    // 触屏设备
+    canvas.ontouchstart = function (val) {
+      using = true
+      var x = val.touches[0].clientX
+      var y = val.touches[0].clientY
+      if (eraserEnabled) {
+        context.clearRect(x-5, y-5, 10, 10)
+      } else {
+        lastPoint = {x: x, y: y}
+      }
     }
-  }
-  
-  canvas.onmousemove = function (val) {
-    var x = val.clientX
-    var y = val.clientY
-    var newPoint = {x: x, y: y}
-    if (!using) return
-    if (eraserEnabled) {
-      context.clearRect(x-5, y-5, 10, 10)
-    } else {
-      drawLines(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-      lastPoint = newPoint
+    canvas.ontouchmove = function (val) {
+      var x = val.touches[0].clientX
+      var y = val.touches[0].clientY
+      var newPoint = {x: x, y: y}
+      if (!using) return
+      if (eraserEnabled) {
+        context.clearRect(x-5, y-5, 10, 10)
+      } else {
+        drawLines(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+        lastPoint = newPoint
+      }
     }
-  }
-  
-  canvas.onmouseup = function (val) {
-    using = false
+    canvas.ontouchend = function (val) {
+      using = false
+    }
+  } else {
+    // 非触屏设备
+    canvas.onmousedown = function (val) {
+      using = true
+      var x = val.clientX
+      var y = val.clientY
+      if (eraserEnabled) {
+        context.clearRect(x-5, y-5, 10, 10)
+      } else {
+        lastPoint = {x: x, y: y}
+      }
+    }
+    
+    canvas.onmousemove = function (val) {
+      var x = val.clientX
+      var y = val.clientY
+      var newPoint = {x: x, y: y}
+      if (!using) return
+      if (eraserEnabled) {
+        context.clearRect(x-5, y-5, 10, 10)
+      } else {
+        drawLines(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+        lastPoint = newPoint
+      }
+    }
+    
+    canvas.onmouseup = function (val) {
+      using = false
+    }
   }
 }
 
