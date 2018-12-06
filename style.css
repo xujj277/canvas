@@ -15,7 +15,7 @@ ul, ol {
   overflow: hidden;
 }
 #canvas {
-  background: #000;
+  /* background: 'lightpink'; */
   display: block;
   position: fixed;
   top: 0;

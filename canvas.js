@@ -54,7 +54,7 @@ thick.onclick = function () {
   lineWidth = 6
 }
 clear.onclick = function () {
-  context.clearRect(0, 0, canvas.width, canvas.height)
+  context.fillRect(0, 0, canvas.width, canvas.height)
   context.fillStyle = 'lightpink';
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -90,7 +90,8 @@ function listenToUser (canvas) {
       var x = val.touches[0].clientX
       var y = val.touches[0].clientY
       if (eraserEnabled) {
-        context.clearRect(x-5, y-5, 10, 10)
+        context.fillStyle = 'lightpink';
+        context.fillRect(x-5, y-5, 10, 10)
       } else {
         lastPoint = {x: x, y: y}
       }
@@ -101,7 +102,8 @@ function listenToUser (canvas) {
       var newPoint = {x: x, y: y}
       if (!using) return
       if (eraserEnabled) {
-        context.clearRect(x-5, y-5, 10, 10)
+        context.fillStyle = 'lightpink';
+        context.fillRect(x-5, y-5, 10, 10)
       } else {
         drawLines(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
         lastPoint = newPoint
@@ -116,8 +118,10 @@ function listenToUser (canvas) {
       using = true
       var x = val.clientX
       var y = val.clientY
+      
       if (eraserEnabled) {
-        context.clearRect(x-5, y-5, 10, 10)
+        context.fillStyle = 'lightpink';
+        context.fillRect(x-5, y-5, 10, 10)
       } else {
         lastPoint = {x: x, y: y}
       }
@@ -129,7 +133,8 @@ function listenToUser (canvas) {
       var newPoint = {x: x, y: y}
       if (!using) return
       if (eraserEnabled) {
-        context.clearRect(x-5, y-5, 10, 10)
+        context.fillStyle = 'lightpink';
+        context.fillRect(x-5, y-5, 10, 10)
       } else {
         drawLines(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
         lastPoint = newPoint
