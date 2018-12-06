@@ -15,7 +15,7 @@ ul, ol {
   overflow: hidden;
 }
 #canvas {
-  background: lightpink;
+  background: #000;
   display: block;
   position: fixed;
   top: 0;
@@ -23,7 +23,7 @@ ul, ol {
 }
 #actions {
   position: fixed;
-  left: 0;
+  left: 36px;
   top: 0;
   padding: 1.2em;
 }
@@ -39,7 +39,7 @@ ul, ol {
 }
 .colors {
   position: fixed;
-  top: 50px;
+  top: 60px;
   left: 25px;
 }
 .colors > li {
@@ -63,10 +63,13 @@ ul, ol {
 .colors > li.yellow {
   background: yellow;
 }
+.colors > li.black {
+  background: #000;
+}
 .sizes {
   position: fixed;
-  top: 45px;
-  right: 10px;
+  top: 188px;
+  left: 25px;
 }
 .sizes > li {
   margin: 20px 0;

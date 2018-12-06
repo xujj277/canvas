@@ -1,13 +1,10 @@
-document.body.ontouchstart = function (e) {
-  e.preventDefault();
-}
-
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var using = false
 var lastPoint = {x: undefined, y: undefined}
 var eraserEnabled = false
-var lineWidth = 5
+var lineWidth = 2
+
 autoResizeCanvas()
 listenToUser(canvas)
 
@@ -22,6 +19,40 @@ brush.onclick = function (val) {
   brush.classList.add('active')
   eraser.classList.remove('active')
 }
+black.onclick = function () {
+  context.strokeStyle = 'black'
+  black.classList.add('active')
+  blue.classList.remove('active')
+  yellow.classList.remove('active')
+  red.classList.remove('active')
+}
+red.onclick = function () {
+  context.strokeStyle = 'red'
+  red.classList.add('active')
+  blue.classList.remove('active')
+  yellow.classList.remove('active')
+  black.classList.remove('active')
+}
+yellow.onclick = function () {
+  context.strokeStyle = 'yellow'
+  yellow.classList.add('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+  black.classList.remove('active')
+}
+blue.onclick = function () {
+  context.strokeStyle = 'blue'
+  blue.classList.add('active')
+  red.classList.remove('active')
+  yellow.classList.remove('active')
+  black.classList.remove('active')
+}
+thin.onclick = function () {
+  lineWidth = 2
+}
+thick.onclick = function () {
+  lineWidth = 6
+}
 clear.onclick = function () {
   context.clearRect(0, 0, canvas.width, canvas.height)
 }
@@ -30,28 +61,10 @@ save.onclick = function () {
   var a = document.createElement('a')
   document.body.appendChild(a)
   a.href = url
-  a.download = 'canvas'
-  a.target = '_blanm'
+  a.download = '我的画画'
+  a.target = '_blank'
   a.click()
 }
-
-red.onclick = function () {
-  context.strokeStyle = 'red'
-}
-yellow.onclick = function () {
-  context.strokeStyle = 'yellow'
-}
-blue.onclick = function () {
-  context.strokeStyle = 'blue'
-}
- 
-thin.onclick = function () {
-  lineWidth = 5
-}
-thick.onclick = function () {
-  lineWidth = 8
-}
-
 function autoResizeCanvas () {
   setCanvasSize()
   window.onresize = function () {
@@ -64,6 +77,8 @@ function setCanvasSize () {
   var pageHeight = document.documentElement.clientHeight
   canvas.width = pageWidth
   canvas.height = pageHeight
+  context.fillStyle = 'lightpink';
+  context.fillRect(0, 0, canvas.width, canvas.height);
 }
 function listenToUser (canvas) {
   if (document.body.ontouchstart !== undefined) {
