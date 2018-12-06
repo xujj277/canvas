@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+body {
+  overflow: hidden;
+}
 ul, ol {
   list-style: none;
 }
@@ -14,6 +17,9 @@ ul, ol {
 #canvas {
   background: lightpink;
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 #actions {
   position: fixed;
@@ -56,4 +62,22 @@ ul, ol {
 }
 .colors > li.yellow {
   background: yellow;
+}
+.sizes {
+  position: fixed;
+  top: 45px;
+  right: 10px;
+}
+.sizes > li {
+  margin: 20px 0;
+}
+.sizes > .thin {
+  height: 0;
+  width: 20px;
+  border-top: 3px solid;
+}
+.sizes > .thick {
+  height: 0;
+  width: 20px;
+  border-top: 6px solid;
 }

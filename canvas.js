@@ -1,9 +1,13 @@
+document.body.ontouchstart = function (e) {
+  e.preventDefault();
+}
+
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var using = false
 var lastPoint = {x: undefined, y: undefined}
 var eraserEnabled = false
-
+var lineWidth = 5
 autoResizeCanvas()
 listenToUser(canvas)
 
@@ -18,6 +22,19 @@ brush.onclick = function (val) {
   brush.classList.add('active')
   eraser.classList.remove('active')
 }
+clear.onclick = function () {
+  context.clearRect(0, 0, canvas.width, canvas.height)
+}
+save.onclick = function () {
+  var url = canvas.toDataURL('image/png')
+  var a = document.createElement('a')
+  document.body.appendChild(a)
+  a.href = url
+  a.download = 'canvas'
+  a.target = '_blanm'
+  a.click()
+}
+
 red.onclick = function () {
   context.strokeStyle = 'red'
 }
@@ -27,6 +44,14 @@ yellow.onclick = function () {
 blue.onclick = function () {
   context.strokeStyle = 'blue'
 }
+ 
+thin.onclick = function () {
+  lineWidth = 5
+}
+thick.onclick = function () {
+  lineWidth = 8
+}
+
 function autoResizeCanvas () {
   setCanvasSize()
   window.onresize = function () {
@@ -103,7 +128,7 @@ function listenToUser (canvas) {
 function drawLines (x1, y1, x2, y2) {
   context.beginPath();
   context.moveTo(x1, y1);
-  context.lineWidth = 5;
+  context.lineWidth = lineWidth;
   context.lineTo(x2, y2);
   context.closePath();
   context.stroke();
