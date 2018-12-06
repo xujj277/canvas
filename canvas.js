@@ -10,13 +10,23 @@ listenToUser(canvas)
 
 eraser.onclick = function (val) {
   eraserEnabled = true
-  actions.className = 'actions showBrushButton'
+  eraser.classList.add('active')
+  brush.classList.remove('active')
 }
 brush.onclick = function (val) {
   eraserEnabled = false
-  actions.className = 'actions'
+  brush.classList.add('active')
+  eraser.classList.remove('active')
 }
- 
+red.onclick = function () {
+  context.strokeStyle = 'red'
+}
+yellow.onclick = function () {
+  context.strokeStyle = 'yellow'
+}
+blue.onclick = function () {
+  context.strokeStyle = 'blue'
+}
 function autoResizeCanvas () {
   setCanvasSize()
   window.onresize = function () {

@@ -2,22 +2,58 @@
   margin: 0;
   padding: 0;
 }
-
+ul, ol {
+  list-style: none;
+}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: #000000;
+  overflow: hidden;
+}
 #canvas {
   background: lightpink;
   display: block;
 }
-.actions {
+#actions {
   position: fixed;
   left: 0;
   top: 0;
+  padding: 1.2em;
 }
-.actions > #brush {
-  display: none;
+#actions svg {
+  width: 1.5em;
+  height: 1.5em;
+  transition: all 0.3s;
+  margin: 0 5px;
 }
-.actions.showBrushButton > #brush {
-  display: inline-block;
+#actions svg.active {
+  fill: #CB6B71;
+  transform: scale(1.2);
 }
-.actions.showBrushButton > #eraser {
-  display: none;
+.colors {
+  position: fixed;
+  top: 50px;
+  left: 25px;
+}
+.colors > li {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  margin: 10px 0;
+}
+.colors > li.active{
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.95);
+  transform: scale(1.2);
+  transition: all 0.3s;
+}
+.colors > li.red{
+  background: red;
+}
+.colors > li.blue{
+  background: blue;
+}
+.colors > li.yellow {
+  background: yellow;
 }
