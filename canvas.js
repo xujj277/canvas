@@ -55,6 +55,8 @@ thick.onclick = function () {
 }
 clear.onclick = function () {
   context.clearRect(0, 0, canvas.width, canvas.height)
+  context.fillStyle = 'lightpink';
+  context.fillRect(0, 0, canvas.width, canvas.height);
 }
 save.onclick = function () {
   var url = canvas.toDataURL('image/png')
